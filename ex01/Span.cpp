@@ -28,6 +28,14 @@ void	Span::addNumber(int i)
 	_v.push_back(i);
 }
 
+void	Span::addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end)
+{
+	int size = std::distance(_v.begin(), _v.end());
+	if (size + std::distance(begin, end) > _N)
+		throw Span::Full();
+	_v.insert(_v.end(), begin, end);
+}
+
 int		Span::shortestSpan()
 {
 	if (_v.size() <= 1)
@@ -52,9 +60,21 @@ int Span::longestSpan()
 	return copy[copy.size() - 1] - copy[0];
 }
 
+std::vector<int> Span::getVector() const
+{
+	return _v;
+}
+
+unsigned int Span::size() const
+{
+	return _v.size();
+}
+
 std::ostream &operator<<(std::ostream &stream, const Span &span)
 {
-	for (unsigned int i = 0; i < span._v.size(); i++)
-		stream << span._v[i] << " ";
+	std::vector<int> v;
+	v = span.getVector();
+	for (unsigned int i = 0; i < span.size(); i++)
+		stream << v[i] << " ";
 	return stream;
 }

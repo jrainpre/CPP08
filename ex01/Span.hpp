@@ -32,9 +32,11 @@ class Span
 		Span &operator=(const Span &copy);
 		~Span();
 		void	addNumber(int i);
+		void 	addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end);
 		int		shortestSpan();
 		int		longestSpan();
-		std::vector<int> getV();
+		unsigned int 	size() const;
+		std::vector<int> getVector() const;
 		class Full : public std::exception
 		{
 			public:		
